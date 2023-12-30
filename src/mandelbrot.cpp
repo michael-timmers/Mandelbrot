@@ -10,14 +10,14 @@ double scale = (double)4 / 800;
 double xOffset = 2;
 double yOffset = 2;
 
-Element* fn(std::complex<double> c, int x, int y, int n) {
-    Element* elem = &set[x][y];
+Element fn(std::complex<double> c, int n) {
+    Element elem;
 
     // check if out of bounds
     // check if already has stable period
     // check if less than the current search limit
-    while (elem->mag < 2 && elem->period == 0 && elem->n <= n) {
-        elem->step(c);
+    while (elem.mag < 2 && elem.period == 0 && elem.n <= n) {
+        elem.step(c);
     }
     return elem;
 }

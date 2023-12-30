@@ -56,12 +56,12 @@ void renderMandelbrot(double scale, double xOffset, double yOffset) {
     for (int x = 0; x < winWidth; x++) {
         for (int y = 0; y < winHeight; y++) {
             std::complex<double> c(x * scale - xOffset, y * scale - yOffset);
-            Element *e = mandelbrot::fn(c, x, y, mandelbrot::totalSearchSteps);
+            Element e = mandelbrot::fn(c, SEARCH_LIMIT);
 
-            if (e->mag < 2 && e->period > 0)
-                SDL_SetRenderDrawColor(renderer, 0, 0, 1023 / (e->period + 3), 255);
+            if (e.mag < 2 && e.period > 0)
+                SDL_SetRenderDrawColor(renderer, 0, 0, 1023 / (e.period + 3), 255);
             else
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255 - 255 * e->n / mandelbrot::totalSearchSteps, 255);
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255 - 255 * e.n / SEARCH_LIMIT, 255);
 
             SDL_RenderDrawPoint(renderer, x, y);
         }
