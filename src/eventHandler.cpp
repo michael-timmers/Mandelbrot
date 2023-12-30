@@ -31,10 +31,6 @@ bool handleInput() {
                 default:
                     break;
             }
-        } else if (mandelbrot::totalSearchSteps < SEARCH_LIMIT - SEARCH_INC) {
-            // look further into the periods, if nothing is happening.
-            mandelbrot::totalSearchSteps += SEARCH_INC;
-            return true;
         }
         SDL_Delay(10);
     }

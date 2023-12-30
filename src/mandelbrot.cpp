@@ -6,10 +6,6 @@
 
 namespace mandelbrot {
 
-int totalSearchSteps = SEARCH_INIT;
-
-Element set[winWidth][winHeight];
-
 double scale = (double)4 / 800;
 double xOffset = 2;
 double yOffset = 2;
