@@ -17,7 +17,7 @@ int lineThickness = 6;
 
 int init() {
     window = SDL_CreateWindow("Mandelbrot Set", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, winWidth, winHeight, SDL_WINDOW_RESIZABLE | SDL_WINDOW_INPUT_GRABBED);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);  // allows for rendering on textures.
+    renderer = SDL_CreateRenderer(window, -1, 0 /*SDL_RENDERER_TARGETTEXTURE*/);  // allows for rendering on textures.
 
     clear();
     return 0;  // success.

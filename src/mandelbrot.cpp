@@ -26,17 +26,12 @@ void zoomIn(int x, int y) {
     scale *= (double)3 / 4;
     xOffset = scale * (winWidth - x) / 2;
     yOffset = scale * (winHeight - y) / 2;
-
-    // reset number of searches
-    totalSearchSteps = SEARCH_INIT;
 }
 
 void zoomOut(int x, int y) {
     mandelbrot::scale /= (double)3 / 4;
     mandelbrot::xOffset = mandelbrot::scale * (winWidth - x) / 2;
     mandelbrot::yOffset = mandelbrot::scale * (winHeight - y) / 2;
-
-    totalSearchSteps = SEARCH_INIT;
 }
 
 }  // namespace mandelbrot
