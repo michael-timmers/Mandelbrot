@@ -55,8 +55,8 @@ void drawThickLine(int x1, int y1, int x2, int y2, int thickness = lineThickness
 void renderMandelbrot(double scale, double xOffset, double yOffset) {
     for (int x = 0; x < winWidth; x++) {
         for (int y = 0; y < winHeight; y++) {
-            std::complex<double> c(x * scale - xOffset, y * scale - yOffset);
-            Element e = mandelbrot::fn(c, SEARCH_LIMIT);
+            std::complex<double> c(scale * (x - xOffset), scale * (y - yOffset));
+            Element e = *mandelbrot::fn(c, SEARCH_LIMIT);
 
             if (e.mag < 2 && e.period > 0)
                 SDL_SetRenderDrawColor(renderer, 0, 0, 1023 / (e.period + 3), 255);

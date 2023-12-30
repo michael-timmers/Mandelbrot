@@ -1,4 +1,5 @@
 #include <complex>
+#include <memory>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
@@ -10,7 +11,7 @@ double scale = (double)4 / 800;
 double xOffset = 2;
 double yOffset = 2;
 
-Element fn(std::complex<double> c, int n) {
+std::unique_ptr<Element> fn(std::complex<double> c, int n) {
     Element elem;
 
     // check if out of bounds
@@ -19,13 +20,15 @@ Element fn(std::complex<double> c, int n) {
     while (elem.mag < 2 && elem.period == 0 && elem.n <= n) {
         elem.step(c);
     }
-    return elem;
+
+    // create a pointer
+    return std::make_unique<Element>(elem);
 }
 
 void zoomIn(int x, int y) {
     scale *= (double)3 / 4;
-    xOffset = scale * (winWidth - x) / 2;
-    yOffset = scale * (winHeight - y) / 2;
+    xOffset += x - xOffset;
+    yOffset += y - yOffset;
 }
 
 void zoomOut(int x, int y) {
