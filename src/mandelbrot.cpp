@@ -8,8 +8,8 @@
 namespace mandelbrot {
 
 double scale = (double)4 / 800;
-double xOffset = 2;
-double yOffset = 2;
+double xOffset = 0;
+double yOffset = 0;
 
 std::unique_ptr<Element> fn(std::complex<double> c, int n) {
     Element elem;
@@ -27,7 +27,7 @@ std::unique_ptr<Element> fn(std::complex<double> c, int n) {
 
 void zoomIn(int x, int y) {
     scale *= (double)3 / 4;
-    xOffset += x - xOffset;
+    xOffset += xOffset - x;
     yOffset += y - yOffset;
 }
 

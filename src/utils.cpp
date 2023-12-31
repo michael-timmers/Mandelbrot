@@ -22,6 +22,10 @@ void run() {
     // profiling variables
     //  int sumTime = 0, numLoops = 0;
 
+    // initally render
+    renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::xOffset, mandelbrot::yOffset);
+    renderer::present();
+
     // event handler loops until input is given, then things are updated..
     while (eventHandler::handleInput()) {
         renderer::clear();
