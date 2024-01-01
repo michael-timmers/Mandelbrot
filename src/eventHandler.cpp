@@ -18,11 +18,11 @@ bool handleInput() {
                         case SDL_BUTTON_LEFT:
                             int x, y;
                             SDL_GetMouseState(&x, &y);
-                            mandelbrot::zoomIn(x, y);
+                            mandelbrot::zoomIn(x, winHeight - y);  // since 0, 0 is top left
                             return true;
                         case SDL_BUTTON_RIGHT:
                             SDL_GetMouseState(&x, &y);
-                            mandelbrot::zoomOut(x, y);
+                            mandelbrot::zoomOut(x, winHeight - y);
                             return true;
                         default:
                             break;

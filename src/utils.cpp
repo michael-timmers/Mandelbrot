@@ -23,7 +23,7 @@ void run() {
     //  int sumTime = 0, numLoops = 0;
 
     // initally render
-    renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::xOffset, mandelbrot::yOffset);
+    renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
     renderer::present();
 
     // event handler loops until input is given, then things are updated..
@@ -32,7 +32,7 @@ void run() {
 
         // auto start = std::chrono::high_resolution_clock::now();
 
-        renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::xOffset, mandelbrot::yOffset);
+        renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
 
         // auto finish = std::chrono::high_resolution_clock::now();
 

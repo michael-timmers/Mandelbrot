@@ -52,10 +52,12 @@ void drawThickLine(int x1, int y1, int x2, int y2, int thickness = lineThickness
         SDL_RenderDrawLine(renderer, x1 + j, y1, x2 + j, y2);
 }
 
-void renderMandelbrot(double scale, double xOffset, double yOffset) {
-    for (int x = 0; x < winWidth; x++) {
-        for (int y = 0; y < winHeight; y++) {
-            std::complex<double> c(scale * (x - xOffset), scale * (y - yOffset));
+void renderMandelbrot(double scale, double xBound, double yBound) {
+    double scaledX = xBound, scaledY;
+    for (int x = 0; x < winWidth; x++, scaledX += scale) {
+        scaledY = yBound;
+        for (int y = winHeight; y > 0; y--, scaledY += scale) {
+            std::complex<double> c(scaledX, scaledY);
             Element e = *mandelbrot::fn(c, SEARCH_LIMIT);
 
             if (e.mag < 2 && e.period > 0)

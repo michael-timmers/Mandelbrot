@@ -8,8 +8,8 @@
 namespace mandelbrot {
 
 extern double scale;
-extern double xOffset;
-extern double yOffset;
+extern double lowerXBound;
+extern double lowerYBound;
 
 std::unique_ptr<Element> fn(std::complex<double> c, int n);
 
