@@ -18,6 +18,8 @@ SDL_Texture* CreateTextureFromSurface(SDL_Surface* surface);
 // changes the render target
 void changeRendrTarget(SDL_Texture* targetTex = NULL);
 
+void drawPoint(int x, int y);
+
 void renderMandelbrot(double scale, double xOffset, double yOffset);
 
 // presents the renderer

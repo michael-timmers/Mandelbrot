@@ -52,6 +52,10 @@ void drawThickLine(int x1, int y1, int x2, int y2, int thickness = lineThickness
         SDL_RenderDrawLine(renderer, x1 + j, y1, x2 + j, y2);
 }
 
+void drawPoint(int x, int y) {
+    SDL_RenderDrawPoint(renderer, x, y);
+}
+
 void renderMandelbrot(double scale, double xBound, double yBound) {
     double scaledX = xBound, scaledY;
     for (int x = 0; x < winWidth; x++, scaledX += scale) {

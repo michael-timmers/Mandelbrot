@@ -20,7 +20,7 @@ int init() {
 
 void run() {
     // profiling variables
-    //  int sumTime = 0, numLoops = 0;
+    int sumTime = 0, numLoops = 0;
 
     // initally render
     renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
@@ -30,18 +30,19 @@ void run() {
     while (eventHandler::handleInput()) {
         renderer::clear();
 
-        // auto start = std::chrono::high_resolution_clock::now();
+        auto start = std::chrono::high_resolution_clock::now();
+        renderer::drawPoint(0, 0);
+        auto finish = std::chrono::high_resolution_clock::now();
 
         renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
 
-        // auto finish = std::chrono::high_resolution_clock::now();
+        sumTime += std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
 
-        // sumTime += std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count();
-
-        // if(numLoops++%20 == 0){
-        // std::cout << "graph render time:" << (sumTime/20) << "microseconds" << "\n";
-        // sumTime = 0;
-        // }
+        if (numLoops++ % 20 == 0) {
+            std::cout << "render time:" << (sumTime / 20) << "microseconds"
+                      << "\n";
+            sumTime = 0;
+        }
 
         renderer::present();
 
