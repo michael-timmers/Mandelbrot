@@ -33,16 +33,16 @@ double mapValue(double val, double lower1, double upper1, double lower2, double 
 }
 
 void zoomIn(int x, int y) {
-    scale *= (double)3 / 4;
-
+    double newScale = scale * (double)3 / 4;
     double scaledX = mapValue(x, 0, winWidth, lowerXBound, lowerXBound + scale * winWidth);
     double scaledY = mapValue(y, 0, winHeight, lowerYBound, lowerYBound + scale * winHeight);
-    lowerXBound = scaledX - scale * winWidth / 2;
-    lowerYBound = scaledY - scale * winHeight / 2;
+    lowerXBound = scaledX - newScale * x;
+    lowerYBound = scaledY - newScale * y;
+
+    scale = newScale;
 
     std::cout << "zooming into " << scaledX << "," << scaledY << " or: " << x << ", " << y << "\n";
-    std::cout
-        << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
+    std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
 }
 
 void zoomOut(int x, int y) {
