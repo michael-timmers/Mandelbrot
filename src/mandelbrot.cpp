@@ -41,13 +41,21 @@ void zoomIn(int x, int y) {
 
     scale = newScale;
 
-    std::cout << "zooming into " << scaledX << "," << scaledY << " or: " << x << ", " << y << "\n";
-    std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
+    // std::cout << "zooming into " << scaledX << "," << scaledY << " or: " << x << ", " << y << "\n";
+    // std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
 }
 
 void zoomOut(int x, int y) {
-    scale /= (double)3 / 4;
-    // other stuff
+    double newScale = scale * (double)4 / 3;
+    double scaledX = mapValue(x, 0, winWidth, lowerXBound, lowerXBound + scale * winWidth);
+    double scaledY = mapValue(y, 0, winHeight, lowerYBound, lowerYBound + scale * winHeight);
+    lowerXBound = scaledX - newScale * x;
+    lowerYBound = scaledY - newScale * y;
+
+    scale = newScale;
+
+    // std::cout << "zooming into " << scaledX << "," << scaledY << " or: " << x << ", " << y << "\n";
+    // std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
 }
 
 }  // namespace mandelbrot

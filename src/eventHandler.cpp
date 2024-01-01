@@ -20,7 +20,14 @@ bool handleInput() {
                             SDL_GetMouseState(&x, &y);
                             mandelbrot::zoomIn(x, winHeight - y);  // since 0, 0 is top left
                             return true;
-                        case SDL_BUTTON_RIGHT:
+
+                        default:
+                            break;
+                    }
+                case SDL_KEYDOWN:
+                    switch (event.key.keysym.sym) {
+                        case SDLK_SPACE:
+                            int x, y;
                             SDL_GetMouseState(&x, &y);
                             mandelbrot::zoomOut(x, winHeight - y);
                             return true;
