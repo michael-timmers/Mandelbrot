@@ -40,7 +40,7 @@ void zoomIn(int x, int y) {
     lowerXBound = scaledX - scale * winWidth / 2;
     lowerYBound = scaledY - scale * winHeight / 2;
 
-    std::cout << "zooming into " << scaledX << "," << scaledY << " or " << x << ", " << y << "\n";
+    std::cout << "zooming into " << scaledX << "," << scaledY << " or: " << x << ", " << y << "\n";
     std::cout
         << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
 }
