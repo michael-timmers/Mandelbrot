@@ -25,15 +25,16 @@ void run() {
         renderer::clear();
 
         timer::start();
-        renderer::renderLegacyMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
+        // renderer::renderLegacyMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
+        renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
         timer::stop();
 
         std::cout << "Mandelbrot time:" << timer::result().count() / 1000000 << "milliseconds"
                   << "\n";
 
         timer::start();
-        // renderer::updateWindowSurfaceWithCanvas();
-        renderer::present();
+        renderer::updateWindowSurfaceWithCanvas();
+        // renderer::present();
         timer::stop();
 
         std::cout << "Update time:" << timer::result().count() / 1000000 << "milliseconds"
