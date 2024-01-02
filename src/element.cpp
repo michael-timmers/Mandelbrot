@@ -12,8 +12,9 @@ Element::Element() {
 
 void Element::step(double c_x, double c_y) {
     // z=z^2+c
-    this->z_x = (this->z_x * this->z_x - this->z_y * this->z_y) + c_x;
+    double newZ_x = (this->z_x * this->z_x - this->z_y * this->z_y) + c_x;
     this->z_y = (2 * this->z_x * this->z_y) + c_y;
+    this->z_x = newZ_x;
 
     this->mag = std::sqrt(this->z_x * this->z_x + this->z_y * this->z_y);
 
