@@ -1,4 +1,3 @@
-#include <complex>
 #include <memory>
 
 #include "headers.hpp"
@@ -11,14 +10,14 @@ double scale = (double)4 / 800;
 double lowerXBound = -2;
 double lowerYBound = -2;
 
-std::unique_ptr<Element> fn(std::complex<double> c, int n) {
+std::unique_ptr<Element> fn(double c_x, double c_y, int n) {
     Element elem;
 
     // check if out of bounds
-    // check if already has stable period
+    // check if has stable period
     // check if less than the current search limit
     while (elem.mag < 2 && elem.period == 0 && elem.n <= n) {
-        elem.step(c);
+        elem.step(c_x, c_y);
     }
 
     // create a pointer

@@ -67,25 +67,6 @@ void drawPoint(int x, int y) {
     SDL_RenderDrawPoint(renderer, x, y);
 }
 
-void renderLegacyMandelbrot(double scale, double xBound, double yBound) {
-    double scaledX = xBound, scaledY;
-    for (int x = 0; x < winWidth; x++, scaledX += scale) {
-        scaledY = yBound;
-        for (int y = winHeight; y > 0; y--, scaledY += scale) {
-            std::complex<double> c(scaledX, scaledY);
-            Element e = *mandelbrot::fn(c, SEARCH_LIMIT);
-
-            if (e.mag < 2 && e.period > 0)
-                SDL_SetRenderDrawColor(renderer, 0, 0, 1023 / (e.period + 3), 255);
-            else
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255 - 255 * e.n / SEARCH_LIMIT, 255);
-
-            SDL_RenderDrawPoint(renderer, x, y);
-        }
-        // std::cout << x << "\n";
-    }
-}
-
 void renderMandelbrot(double scale, double xBound, double yBound) {
     Uint32 colour;
     SDL_LockSurface(canvas);
@@ -94,8 +75,7 @@ void renderMandelbrot(double scale, double xBound, double yBound) {
     for (int x = 0; x < winWidth; x++, scaledX += scale) {
         scaledY = yBound;
         for (int y = winHeight; y > 0; y--, scaledY += scale) {
-            std::complex<double> c(scaledX, scaledY);
-            Element e = *mandelbrot::fn(c, SEARCH_LIMIT);
+            Element e = *mandelbrot::fn(scaledX, scaledY, SEARCH_LIMIT);
 
             if (e.mag < 2 && e.period > 0)
                 colour = SDL_MapRGBA(canvas->format, 0, 0, 1023 / (e.period + 3), 255);

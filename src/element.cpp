@@ -1,19 +1,22 @@
-#include <complex>
 #include <algorithm>
 
 #include "headers.hpp"
 #include "element.hpp"
 
 Element::Element() {
-    // z is by defualt 0+0i
+    this->z_x = 0, this->z_y = 0;
     this->mag = 0;
     this->n = 0;
     this->period = 0;
 }
 
-void Element::step(std::complex<double> c) {
-    this->z = std::pow(this->z, 2) + c;
-    this->mag = std::abs(this->z);
+void Element::step(double c_x, double c_y) {
+    // z=z^2+c
+    this->z_x = (this->z_x * this->z_x - this->z_y * this->z_y) + c_x;
+    this->z_y = (2 * this->z_x * this->z_y) + c_y;
+
+    this->mag = std::sqrt(this->z_x * this->z_x + this->z_y * this->z_y);
+
     this->n++;
     this->findPatterns();
     this->history[this->n] = this->mag;

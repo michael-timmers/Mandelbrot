@@ -1,12 +1,11 @@
 #pragma once
-#include <complex>
 
 #include "headers.hpp"
-#include <complex>
 
 class Element {
    public:
-    std::complex<double> z;
+    double z_x;
+    double z_y;
     double mag;
     int n;
     double history[SEARCH_LIMIT];
@@ -14,7 +13,7 @@ class Element {
 
     Element();
 
-    void step(std::complex<double> c);
+    void step(double c_x, double c_y);
 
    private:
     void findPatterns();

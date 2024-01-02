@@ -1,5 +1,4 @@
 #pragma once
-#include <complex>
 #include <memory>
 
 #include "headers.hpp"
@@ -11,7 +10,7 @@ extern double scale;
 extern double lowerXBound;
 extern double lowerYBound;
 
-std::unique_ptr<Element> fn(std::complex<double> c, int n);
+std::unique_ptr<Element> fn(double c_x, double c_y, int n);
 
 void zoomIn(int x, int y);
 void zoomOut(int x, int y);
