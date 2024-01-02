@@ -77,7 +77,7 @@ void renderMandelbrot(double scale, double xBound, double yBound) {
         for (int y = winHeight; y > 0; y--, scaledY += scale) {
             Element e = *mandelbrot::fn(scaledX, scaledY, SEARCH_LIMIT);
 
-            if (e.mag < 2 && e.period > 0)
+            if (e.mag < 4 && e.period > 0)
                 colour = SDL_MapRGBA(canvas->format, 0, 0, 1023 / (e.period + 3), 255);
             else
                 colour = SDL_MapRGBA(canvas->format, 255, 255, 255 - 255 * e.n / SEARCH_LIMIT, 255);

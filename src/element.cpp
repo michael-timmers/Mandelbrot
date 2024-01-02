@@ -16,7 +16,7 @@ void Element::step(double c_x, double c_y) {
     this->z_y = (2 * this->z_x * this->z_y) + c_y;
     this->z_x = newZ_x;
 
-    this->mag = std::sqrt(this->z_x * this->z_x + this->z_y * this->z_y);
+    this->mag = this->z_x * this->z_x + this->z_y * this->z_y;
 
     this->n++;
     this->findPatterns();

@@ -16,7 +16,7 @@ std::unique_ptr<Element> fn(double c_x, double c_y, int n) {
     // check if out of bounds
     // check if has stable period
     // check if less than the current search limit
-    while (elem.mag < 2 && elem.period == 0 && elem.n <= n) {
+    while (elem.mag < 4 && elem.period == 0 && elem.n <= n) {
         elem.step(c_x, c_y);
     }
 
