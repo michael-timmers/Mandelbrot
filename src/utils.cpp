@@ -35,11 +35,16 @@ void run() {
         renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
         timer::stop();
 
-        std::cout << "render time:" << timer::result() / 1000000 << "milliseconds"
+        std::cout << "Mandelbrot time:" << timer::result().count() / 1000000 << "milliseconds"
                   << "\n";
 
+        timer::start();
         renderer::updateWindowSurfaceWithCanvas();
         // renderer::present();
+        timer::stop();
+
+        std::cout << "Update time:" << timer::result().count() / 1000000 << "milliseconds"
+                  << "\n";
 
         SDL_Delay(10);
     }
