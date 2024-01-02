@@ -20,6 +20,8 @@ void changeRendrTarget(SDL_Texture* targetTex = NULL);
 
 void drawPoint(int x, int y);
 
+void renderLegacyMandelbrot(double scale, double xOffset, double yOffset);
+
 void renderMandelbrot(double scale, double xOffset, double yOffset);
 
 void renderTest();
