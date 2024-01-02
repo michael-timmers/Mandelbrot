@@ -20,9 +20,6 @@ int init() {
 }
 
 void run() {
-    // profiling variables
-    int sumTime = 0, numLoop = 0;
-
     // initally render
     renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
     renderer::present();
@@ -32,16 +29,12 @@ void run() {
         renderer::clear();
 
         timer::start();
+        renderer::drawPoint(0, 0);
+        timer::stop();
+
         renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
-        timer::finish();
-
-        sumTime += timer::result();
-
-        if (numLoops++ % 20 == 0) {
-            std::cout << "render time:" << (sumTime / 20) << "nano seconds"
-                      << "\n";
-            sumTime = 0;
-        }
+        std::cout << "render time:" << timer::result() / 1000 << "micro seconds"
+                  << "\n";
 
         renderer::present();
 

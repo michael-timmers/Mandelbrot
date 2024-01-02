@@ -53,6 +53,7 @@ void drawThickLine(int x1, int y1, int x2, int y2, int thickness = lineThickness
 }
 
 void drawPoint(int x, int y) {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     SDL_RenderDrawPoint(renderer, x, y);
 }
 
