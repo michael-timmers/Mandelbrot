@@ -11,15 +11,25 @@ namespace renderer {
 SDL_Renderer *renderer;
 SDL_Window *window;
 
+// for fast access to pixels of window
+SDL_Surface *window_surface;
+SDL_Surface *canvas;
+Uint32 *canvasBuffer;
+
 // changable.
 SDL_Color backgroundColour = {255, 255, 255};
 int lineThickness = 6;
 
 int init() {
     window = SDL_CreateWindow("Mandelbrot Set", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, winWidth, winHeight, SDL_WINDOW_RESIZABLE | SDL_WINDOW_INPUT_GRABBED);
-    renderer = SDL_CreateRenderer(window, -1, 0 /*SDL_RENDERER_TARGETTEXTURE*/);  // allows for rendering on textures.
+    // renderer = SDL_CreateRenderer(window, -1, 0 /*SDL_RENDERER_TARGETTEXTURE*/);  // allows for rendering on textures.
 
-    clear();
+    window_surface = SDL_GetWindowSurface(window);
+    canvas = SDL_CreateRGBSurfaceWithFormat(
+        0, winWidth, winHeight, 32, SDL_PIXELFORMAT_RGBA8888);
+    canvasBuffer = (Uint32 *)canvas->pixels;
+
+    // clear();
     return 0;  // success.
 }
 
@@ -58,6 +68,9 @@ void drawPoint(int x, int y) {
 }
 
 void renderMandelbrot(double scale, double xBound, double yBound) {
+    Uint32 colour;
+    SDL_LockSurface(canvas);
+
     double scaledX = xBound, scaledY;
     for (int x = 0; x < winWidth; x++, scaledX += scale) {
         scaledY = yBound;
@@ -66,22 +79,48 @@ void renderMandelbrot(double scale, double xBound, double yBound) {
             Element e = *mandelbrot::fn(c, SEARCH_LIMIT);
 
             if (e.mag < 2 && e.period > 0)
-                SDL_SetRenderDrawColor(renderer, 0, 0, 1023 / (e.period + 3), 255);
+                colour = SDL_MapRGBA(canvas->format, 0, 0, 1023 / (e.period + 3), 255);
             else
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255 - 255 * e.n / SEARCH_LIMIT, 255);
+                colour = SDL_MapRGBA(canvas->format, 255, 255, 255 - 255 * e.n / SEARCH_LIMIT, 255);
 
-            SDL_RenderDrawPoint(renderer, x, y);
+            canvasBuffer[y * winWidth + x] = colour;
         }
         // std::cout << x << "\n";
     }
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_UnlockSurface(canvas);
+}
+
+void renderTest() {
+    int row = 0;
+    int column = 0;
+    int offset;
+    Uint32 color;
+    SDL_LockSurface(canvas);
+    while (row < 800) {
+        column = 0;
+        while (column < 800) {
+            offset = row * 800 + column;
+            color = SDL_MapRGBA(canvas->format, 0, 0, 255, 255);
+            canvasBuffer[offset] = color;
+            column++;
+        }
+        row++;
+    }
+    SDL_UnlockSurface(canvas);
 }
 
 void present() {
     SDL_RenderPresent(renderer);
 }
 
+void updateWindowSurfaceWithCanvas() {
+    SDL_BlitSurface(canvas, NULL, window_surface, NULL);
+    SDL_UpdateWindowSurface(window);
+}
+
 void kill() {
+    SDL_FreeSurface(canvas);
+    SDL_FreeSurface(window_surface);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }

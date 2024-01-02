@@ -22,21 +22,24 @@ int init() {
 void run() {
     // initally render
     renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
-    renderer::present();
+    // renderer::renderTest();
+
+    renderer::updateWindowSurfaceWithCanvas();
+    // renderer::present();
 
     // event handler loops until input is given, then things are updated..
     while (eventHandler::handleInput()) {
-        renderer::clear();
+        // renderer::clear();
 
         timer::start();
-        renderer::drawPoint(0, 0);
+        renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
         timer::stop();
 
-        renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
-        std::cout << "render time:" << timer::result() / 1000 << "micro seconds"
+        std::cout << "render time:" << timer::result() / 1000000 << "milliseconds"
                   << "\n";
 
-        renderer::present();
+        renderer::updateWindowSurfaceWithCanvas();
+        // renderer::present();
 
         SDL_Delay(10);
     }

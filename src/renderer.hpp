@@ -22,8 +22,12 @@ void drawPoint(int x, int y);
 
 void renderMandelbrot(double scale, double xOffset, double yOffset);
 
+void renderTest();
+
 // presents the renderer
 void present();
+
+void updateWindowSurfaceWithCanvas();
 
 // destroys the variables
 void kill();
