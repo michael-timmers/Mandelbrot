@@ -36,8 +36,6 @@ void run(bool runProfiling, int numLoops) {
         timer::stop();
 
         mandelbrotTime = timer::result().count() / 1000000;
-        std::cout << "Mandelbrot time:" << mandelbrotTime << "milliseconds"
-                  << "\n";
 
         timer::start();
         renderer::updateWindowSurfaceWithCanvas();
@@ -45,8 +43,8 @@ void run(bool runProfiling, int numLoops) {
         timer::stop();
 
         renderTime = timer::result().count() / 1000000;
-        std::cout << "Update time:" << renderTime << "milliseconds"
-                  << "\n";
+
+        std::cout << "Time:" << mandelbrotTime << " and " << renderTime << "ns\n";
 
         if (runProfiling) {
             i++;
@@ -55,7 +53,7 @@ void run(bool runProfiling, int numLoops) {
             if (i == numLoops) {
                 std::cout << "average time:" << mandelbrotTimeSum / numLoops << " and " << renderTimeSum / numLoops << "ms"
                           << "\n";
-                timeSum = 0;
+                mandelbrotTimeSum = 0, renderTimeSum = 0;
                 break;
             }
         }

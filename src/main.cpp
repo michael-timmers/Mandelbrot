@@ -8,7 +8,7 @@ int main(void) {
     if (utils::init() == 0) {
         // the rendering loop, pass true for average rendering time
         // aslo pass number of loops to get average
-        utils::run(true, 10);
+        utils::run(true, 20);
     }
 
     utils::kill();
