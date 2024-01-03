@@ -1,4 +1,4 @@
-#include <unordered_map>
+// #include <unordered_map>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
@@ -12,15 +12,11 @@ double lowerXBound = -2;
 double lowerYBound = -2;
 
 // colour lookup tables
-std::unordered_map<int, Uint8> escapeColours;
-std::unordered_map<int, Uint8> periodColours;
+// std::unordered_map<int, Uint8> escapeColours;
+// std::unordered_map<int, Uint8> periodColours;
 
 // initialise colour lookup tables
 int init() {
-    for (int i = 0; i < SEARCH_LIMIT; i++) {
-        escapeColours[i] = 255 - 255 * i / SEARCH_LIMIT;
-        periodColours[i] = 1023 / (i + 3);
-    }
     return 0;
 }
 

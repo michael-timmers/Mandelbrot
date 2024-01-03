@@ -8,7 +8,7 @@ void intro();
 // initialises all SDL and TTF variables
 int init();
 
-void run();
+void run(bool runProfiling = false);
 
 // destroys all variables from SDL and TTF
 void kill();

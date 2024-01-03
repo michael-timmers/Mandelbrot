@@ -22,17 +22,21 @@ int init() {
     return 0;  // success
 }
 
-void run() {
+void run(bool runProfiling) {
+    // profiling variables:
+    int timeSum = 0, numLoops = 0, mandelbrotTime, renderTime;
+
     // event handler loops until input is given, then things are updated..
     do {
-        renderer::clear();
+        // renderer::clear();
 
         timer::start();
         // renderer::renderLegacyMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
         renderer::renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
         timer::stop();
 
-        std::cout << "Mandelbrot time:" << timer::result().count() / 1000000 << "milliseconds"
+        mandelbrotTime = timer::result().count() / 1000000;
+        std::cout << "Mandelbrot time:" << mandelbrotTime << "milliseconds"
                   << "\n";
 
         timer::start();
@@ -40,11 +44,23 @@ void run() {
         // renderer::present();
         timer::stop();
 
-        std::cout << "Update time:" << timer::result().count() / 1000000 << "milliseconds"
+        renderTime = timer::result().count() / 1000000;
+        std::cout << "Update time:" << renderTime << "milliseconds"
                   << "\n";
 
+        if (runProfiling) {
+            numLoops++;
+            timeSum += mandelbrotTime;
+            timeSum += renderTime;
+            if (numLoops == 5) {
+                std::cout << "average time:" << timeSum / 5 << "\n";
+                timeSum = 0;
+                break;
+            }
+        }
+
         SDL_Delay(10);
-    } while (eventHandler::handleInput());
+    } while (runProfiling || eventHandler::handleInput());
 }
 
 void kill() {
