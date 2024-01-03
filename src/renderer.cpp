@@ -3,7 +3,6 @@
 #include "headers.hpp"
 #include "renderer.hpp"
 #include "mandelbrot.hpp"
-#include "element.hpp"
 
 namespace renderer {
 

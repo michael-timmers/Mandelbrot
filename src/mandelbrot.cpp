@@ -1,8 +1,8 @@
 // #include <unordered_map>
+#include <algorithm>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
-#include "element.hpp"
 #include "renderer.hpp"
 
 namespace mandelbrot {
@@ -21,24 +21,39 @@ int init() {
 }
 
 Uint32 fn(double c_x, double c_y, int limit) {
-    Element elem;
+    double z_x = 0, z_y = 0;
+    double mag = 0;
+    int n = 0, period = 0;
+    double history[SEARCH_LIMIT];
 
     // check if out of bounds
     // check if has stable period
     // check if less than the current search limit
-    while (elem.n < limit) {
-        elem.step(c_x, c_y);
+    while (n < limit) {
+        double xSquared = z_x * z_x;
+        double ySquared = z_y * z_y;
 
-        if (elem.mag >= 4) {
+        // z=z^2+c
+        double newZ_x = (xSquared - ySquared) + c_x;
+        z_y = (2 * z_x * z_y) + c_y;
+        z_x = newZ_x;
+
+        mag = xSquared + ySquared;
+
+        n++;
+        period = n - std::distance(history, std::find(history, history + n, mag));
+        history[n] = mag;
+
+        if (mag >= 4) {
             break;
-        } else if (elem.period > 0) {
+        } else if (period > 0) {
             // std::cout << "found" << std::endl;
-            return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (elem.period + 3), 255);
+            return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
         }
     }
 
     // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * elem.n / limit, 255);
+    return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * n / limit, 255);
 }
 
 // from bound 1 to bound 2
