@@ -69,15 +69,17 @@ void drawPoint(int x, int y) {
 
 void renderMandelbrot(double scale, double xBound, double yBound) {
     Uint32 colour;
-    SDL_LockSurface(canvas);
 
     double scaledX = xBound, scaledY;
+    int linearPos = 0;
+
+    SDL_LockSurface(canvas);
     for (int x = 0; x < winWidth; x++, scaledX += scale) {
         scaledY = yBound;
-        for (int y = winHeight; y > 0; y--, scaledY += scale) {
+        for (int y = winHeight; y > 0; y--, scaledY += scale, linearPos++) {
             colour = mandelbrot::fn(scaledX, scaledY, SEARCH_LIMIT);
 
-            canvasBuffer[y * winWidth + x] = colour;
+            canvasBuffer[linearPos] = colour;
         }
         // std::cout << x << "\n";
     }

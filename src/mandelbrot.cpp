@@ -17,9 +17,8 @@ Uint32 fn(double c_x, double c_y, int n) {
     // check if has stable period
     // check if less than the current search limit
     while (elem.n < n) {
-        // std::cout << "n:";
         elem.step(c_x, c_y);
-        // std::cout << elem.n << std::endl;
+
         if (elem.mag >= 4) {
             break;
         } else if (elem.period > 0) {
