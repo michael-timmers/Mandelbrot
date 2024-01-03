@@ -16,6 +16,9 @@ int init() {
     if (renderer::init() == 1)
         return 1;  // window or renderer not created.
 
+    if (mandelbrot::init() == 1)
+        return 1;
+
     return 0;  // success
 }
 

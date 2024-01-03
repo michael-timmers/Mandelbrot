@@ -9,6 +9,8 @@ extern double scale;
 extern double lowerXBound;
 extern double lowerYBound;
 
+int init();
+
 // returns the colour for specified point
 Uint32 fn(double c_x, double c_y, int n);
 

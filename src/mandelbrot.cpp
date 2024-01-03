@@ -1,3 +1,4 @@
+#include <unordered_map>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
@@ -10,13 +11,26 @@ double scale = (double)4 / 800;
 double lowerXBound = -2;
 double lowerYBound = -2;
 
-Uint32 fn(double c_x, double c_y, int n) {
+// colour lookup tables
+std::unordered_map<int, Uint8> escapeColours;
+std::unordered_map<int, Uint8> periodColours;
+
+// initialise colour lookup tables
+int init() {
+    for (int i = 0; i < SEARCH_LIMIT; i++) {
+        escapeColours[i] = 255 - 255 * i / SEARCH_LIMIT;
+        periodColours[i] = 1023 / (i + 3);
+    }
+    return 0;
+}
+
+Uint32 fn(double c_x, double c_y, int limit) {
     Element elem;
 
     // check if out of bounds
     // check if has stable period
     // check if less than the current search limit
-    while (elem.n < n) {
+    while (elem.n < limit) {
         elem.step(c_x, c_y);
 
         if (elem.mag >= 4) {
@@ -28,7 +42,7 @@ Uint32 fn(double c_x, double c_y, int n) {
     }
 
     // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * elem.n / SEARCH_LIMIT, 255);
+    return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * elem.n / limit, 255);
 }
 
 // from bound 1 to bound 2
