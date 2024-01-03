@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 
 #include "headers.hpp"
 #include "element.hpp"
@@ -10,7 +9,8 @@ extern double scale;
 extern double lowerXBound;
 extern double lowerYBound;
 
-std::unique_ptr<Element> fn(double c_x, double c_y, int n);
+// returns the colour for specified point
+Uint32 fn(double c_x, double c_y, int n);
 
 void zoomIn(int x, int y);
 void zoomOut(int x, int y);

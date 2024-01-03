@@ -1,8 +1,8 @@
-#include <memory>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
 #include "element.hpp"
+#include "renderer.hpp"
 
 namespace mandelbrot {
 
@@ -10,18 +10,26 @@ double scale = (double)4 / 800;
 double lowerXBound = -2;
 double lowerYBound = -2;
 
-std::unique_ptr<Element> fn(double c_x, double c_y, int n) {
+Uint32 fn(double c_x, double c_y, int n) {
     Element elem;
 
     // check if out of bounds
     // check if has stable period
     // check if less than the current search limit
-    while (elem.mag < 4 && elem.period == 0 && elem.n <= n) {
+    while (elem.n < n) {
+        // std::cout << "n:";
         elem.step(c_x, c_y);
+        // std::cout << elem.n << std::endl;
+        if (elem.mag >= 4) {
+            break;
+        } else if (elem.period > 0) {
+            // std::cout << "found" << std::endl;
+            return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (elem.period + 3), 255);
+        }
     }
 
-    // create a pointer
-    return std::make_unique<Element>(elem);
+    // past the search limit
+    return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * elem.n / SEARCH_LIMIT, 255);
 }
 
 // from bound 1 to bound 2

@@ -1,6 +1,10 @@
 #pragma once
 
+#include "headers.hpp"
+
 namespace renderer {
+
+extern SDL_Surface* canvas;
 
 // set up renderer and window
 int init();
