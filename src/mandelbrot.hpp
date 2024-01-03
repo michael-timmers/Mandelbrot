@@ -1,7 +1,6 @@
 #pragma once
 
 #include "headers.hpp"
-#include "element.hpp"
 
 namespace mandelbrot {
 

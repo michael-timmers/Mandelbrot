@@ -22,21 +22,21 @@ int init() {
 
 Uint32 fn(double c_x, double c_y, int limit) {
     double z_x = 0, z_y = 0;
+    double tempX, xSquared = 0, ySquared = 0, w = 0;  // tricky variables
     double mag = 0;
     int n = 0, period = 0;
     double history[SEARCH_LIMIT];
 
-    // check if out of bounds
-    // check if has stable period
     // check if less than the current search limit
     while (n < limit) {
-        double xSquared = z_x * z_x;
-        double ySquared = z_y * z_y;
-
         // z=z^2+c
-        double newZ_x = (xSquared - ySquared) + c_x;
-        z_y = (2 * z_x * z_y) + c_y;
-        z_x = newZ_x;
+        tempX = (xSquared - ySquared) + c_x;
+        z_y = w - mag + c_y;  // 2*x*y+c
+        z_x = tempX;
+
+        xSquared = z_x * z_x;
+        ySquared = z_y * z_y;
+        w = (z_x + z_y) * (z_x + z_y);
 
         mag = xSquared + ySquared;
 
