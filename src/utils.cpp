@@ -22,9 +22,9 @@ int init() {
     return 0;  // success
 }
 
-void run(bool runProfiling) {
+void run(bool runProfiling, int numLoops) {
     // profiling variables:
-    int timeSum = 0, numLoops = 0, mandelbrotTime, renderTime;
+    int mandelbrotTimeSum = 0, renderTimeSum = 0, i = 0, mandelbrotTime, renderTime;
 
     // event handler loops until input is given, then things are updated..
     do {
@@ -49,11 +49,12 @@ void run(bool runProfiling) {
                   << "\n";
 
         if (runProfiling) {
-            numLoops++;
-            timeSum += mandelbrotTime;
-            timeSum += renderTime;
-            if (numLoops == 5) {
-                std::cout << "average time:" << timeSum / 5 << "\n";
+            i++;
+            mandelbrotTimeSum += mandelbrotTime;
+            renderTimeSum += renderTime;
+            if (i == numLoops) {
+                std::cout << "average time:" << mandelbrotTimeSum / numLoops << " and " << renderTimeSum / numLoops << "ms"
+                          << "\n";
                 timeSum = 0;
                 break;
             }
