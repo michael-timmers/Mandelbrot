@@ -26,7 +26,6 @@ Uint32 fn(double c_x, double c_y, int limit) {
     double mag = 0;
     int n = 0, period = 0;
     double history[SEARCH_LIMIT];
-    double* ptr;
 
     for (; n < limit; n++) {
         // z=z^2+c
@@ -42,11 +41,7 @@ Uint32 fn(double c_x, double c_y, int limit) {
         if (mag >= 4)
             break;
 
-        ptr = history;
-        for (; *ptr != mag && ptr < history + n; ptr++)
-            ;
-
-        period = n - (ptr - history);
+        period = n - std::distance(history, std::find(history, history + n, mag));
         if (period > 0) {
             // std::cout << "found" << std::endl;
             return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
