@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo compiling and linking...
-time clang++ -O1 *.cpp -o MacBuild -std=c++17 -l SDL2 2> errors
+time clang++ -O2 *.cpp -o MacBuild -std=c++17 -l SDL2 2> errors
 
 #check if errors is empty
 if [ -s errors ]; then
