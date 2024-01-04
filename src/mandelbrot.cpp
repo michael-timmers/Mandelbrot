@@ -41,7 +41,7 @@ Uint32 fn(double c_x, double c_y, int limit) {
         if (mag >= 4)
             break;
 
-        period = n + 1 - std::distance(history, std::find(history, history + n, mag));
+        period = n - std::distance(history, std::find(history, history + n, mag));
         if (period > 0) {
             // std::cout << "found" << std::endl;
             return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
