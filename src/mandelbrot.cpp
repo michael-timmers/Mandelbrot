@@ -27,8 +27,7 @@ Uint32 fn(double c_x, double c_y, int limit) {
     int n = 0, period = 0;
     double history[SEARCH_LIMIT];
 
-    // check if less than the current search limit
-    while (n < limit) {
+    for (; n < limit; n++) {
         // z=z^2+c
         tempX = (xSquared - ySquared) + c_x;
         z_y = w - mag + c_y;  // 2*x*y+c
@@ -39,17 +38,15 @@ Uint32 fn(double c_x, double c_y, int limit) {
         w = (z_x + z_y) * (z_x + z_y);
 
         mag = xSquared + ySquared;
-
-        n++;
-        period = n - std::distance(history, std::find(history, history + n, mag));
-        history[n] = mag;
-
-        if (mag >= 4) {
+        if (mag >= 4)
             break;
-        } else if (period > 0) {
+
+        period = n + 1 - std::distance(history, std::find(history, history + n, mag));
+        if (period > 0) {
             // std::cout << "found" << std::endl;
             return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
         }
+        history[n] = mag;
     }
 
     // past the search limit
