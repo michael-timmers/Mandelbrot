@@ -3,6 +3,7 @@
 
 namespace eventHandler {
 
+// SDL variable
 SDL_Event event;
 
 bool handleInput() {
