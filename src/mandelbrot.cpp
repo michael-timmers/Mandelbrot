@@ -1,5 +1,5 @@
-#include <unordered_map>
-// #include <algorithm>
+// #include <unordered_map>
+#include <algorithm>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
@@ -25,8 +25,7 @@ Uint32 fn(double c_x, double c_y, int limit) {
     double tempX, xSquared = 0, ySquared = 0, w = 0;  // tricky variables
     double mag = 0;
     int n = 0, period = 0;
-    std::unordered_map<double, int> history;
-    history.reserve(limit);
+    double history[SEARCH_LIMIT];
 
     // check if less than the current search limit
     while (n < limit) {
@@ -41,18 +40,16 @@ Uint32 fn(double c_x, double c_y, int limit) {
 
         mag = xSquared + ySquared;
 
-        if (mag >= 4)
-            break;
-
         n++;
+        period = n - std::distance(history, std::find(history, history + n, mag));
+        history[n] = mag;
 
-        // find repeated magnitude
-        auto it = history.find(mag);
-
-        if (it == history.end())
-            history.emplace(mag, n);
-        else  // number has found stable period
-            return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (n - it->second + 3), 255);
+        if (mag >= 4) {
+            break;
+        } else if (period > 0) {
+            // std::cout << "found" << std::endl;
+            return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
+        }
     }
 
     // past the search limit
