@@ -61,7 +61,7 @@ double mapValue(double val, double lower1, double upper1, double lower2, double 
 }
 
 void zoomIn(int x, int y) {
-    double newScale = scale * (double)3 / 4;
+s    double newScale = scale * (double)3 / 4;
     double scaledX = mapValue(x, 0, winWidth, lowerXBound, lowerXBound + scale * winWidth);
     double scaledY = mapValue(y, 0, winHeight, lowerYBound, lowerYBound + scale * winHeight);
     lowerXBound = scaledX - newScale * x;
