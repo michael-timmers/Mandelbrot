@@ -13,4 +13,4 @@
 using std::string;
 
 // all the extern variables
-#include "globalVars.hpp"
+#include "globals.hpp"
