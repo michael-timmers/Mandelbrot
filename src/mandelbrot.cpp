@@ -20,6 +20,10 @@ int init() {
     return 0;
 }
 
+int indexOf(double[] arr, double num, int upperLim) {
+    return std::distance(arr, std::find(arr, arr + upperLim, num));
+}
+
 Uint32 fn(double c_x, double c_y, int limit) {
     double z_x = 0, z_y = 0;
     double tempX, xSquared = 0, ySquared = 0, w = 0;  // tricky variables
@@ -41,7 +45,7 @@ Uint32 fn(double c_x, double c_y, int limit) {
         if (mag >= 4)
             break;
 
-        period = n - std::distance(history, std::find(history, history + n, mag));
+        period = n - indexOf(history, mag, n);
         if (period > 0) {
             // std::cout << "found" << std::endl;
             return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
