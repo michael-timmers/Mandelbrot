@@ -19,6 +19,10 @@ int init() {
     return 0;
 }
 
+int hyperbolicColour(int scale, int shift, int x) {
+    return scale / (x + shift);
+}
+
 Uint32 fn(double c_x, double c_y, int limit) {
     double z_x = 0, z_y = 0;
     double xSquared = 0, ySquared = 0, w = 0;  // tricky variables
@@ -26,7 +30,7 @@ Uint32 fn(double c_x, double c_y, int limit) {
         mag = 0, distance = 0;
     int n = 0;
 
-    for (; n < limit; n++) {
+    for (; n < limit && mag < 4; n++) {
         tempX = z_x;
         tempY = z_y;
 
@@ -44,13 +48,13 @@ Uint32 fn(double c_x, double c_y, int limit) {
         mag = xSquared + ySquared;
         distance += xSquared + 2 * z_x * tempX + tempXSq + ySquared + 2 * z_y * tempY + tempYSq;
         // distance += mag;
-
-        if (mag >= 4)
-            return SDL_MapRGBA(renderer::canvas->format, 255, 255, 1023 / (n + 3), 255);
     }
 
+    if (mag >= 4)
+        return SDL_MapRGBA(renderer::canvas->format, 255, 255, hyperbolicColour(1023, 3, n), 255);
+
     // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 0, 0, 32767 / (distance + 127), 255);
+    return SDL_MapRGBA(renderer::canvas->format, 0, 0, hyperbolicColour(32767, 127, distance), 255);
 }
 
 // from bound 1 to bound 2
