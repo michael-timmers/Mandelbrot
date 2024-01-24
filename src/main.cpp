@@ -8,7 +8,7 @@ int main(void) {
     if (utils::init() == 0) {
         // the rendering loop, pass true for limited number of renders
         // also pass number of loops
-        utils::run(false, 1);
+        utils::run(true, 1);
     }
 
     utils::kill();

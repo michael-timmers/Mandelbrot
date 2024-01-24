@@ -1,4 +1,4 @@
-// #include <algorithm>
+#include <algorithm>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
@@ -43,13 +43,14 @@ Uint32 fn(double c_x, double c_y, int limit) {
 
         mag = xSquared + ySquared;
         distance += xSquared + 2 * z_x * tempX + tempXSq + ySquared + 2 * z_y * tempY + tempYSq;
+        // distance += mag;
 
         if (mag >= 4)
-            return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * n / limit, 255);
+            return SDL_MapRGBA(renderer::canvas->format, 255, 255, 1023 / (n + 3), 255);
     }
 
     // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 0, 0, 255 - 255 * distance / (4 * limit), 255);
+    return SDL_MapRGBA(renderer::canvas->format, 0, 0, 32767 / (distance + 127), 255);
 }
 
 // from bound 1 to bound 2
