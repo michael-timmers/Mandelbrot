@@ -1,5 +1,4 @@
-// #include <unordered_map>
-#include <algorithm>
+// #include <algorithm>
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
@@ -21,7 +20,10 @@ int init() {
 }
 
 int indexOf(double arr[], double num, int upperLim) {
-    return std::distance(arr, std::find(arr, arr + upperLim, num));
+    double *it;
+    for (it = arr; it - arr < upperLim && *it != num; it++)
+        ;
+    return it - arr;
 }
 
 Uint32 fn(double c_x, double c_y, int limit) {
