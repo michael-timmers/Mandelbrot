@@ -20,7 +20,7 @@ int init() {
     return 0;
 }
 
-int indexOf(double[] arr, double num, int upperLim) {
+int indexOf(double arr[], double num, int upperLim) {
     return std::distance(arr, std::find(arr, arr + upperLim, num));
 }
 
