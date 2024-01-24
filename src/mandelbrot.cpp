@@ -19,19 +19,11 @@ int init() {
     return 0;
 }
 
-int indexOf(double arr[], double num, int upperLim) {
-    double *it;
-    for (it = arr; it - arr < upperLim && *it != num; it++)
-        ;
-    return it - arr;
-}
-
 Uint32 fn(double c_x, double c_y, int limit) {
     double z_x = 0, z_y = 0;
     double tempX, xSquared = 0, ySquared = 0, w = 0;  // tricky variables
     double mag = 0;
-    int n = 0, period = 0;
-    double history[SEARCH_LIMIT];
+    int n = 0;
 
     for (; n < limit; n++) {
         // z=z^2+c
@@ -46,13 +38,6 @@ Uint32 fn(double c_x, double c_y, int limit) {
         mag = xSquared + ySquared;
         if (mag >= 4)
             break;
-
-        period = n - indexOf(history, mag, n);
-        if (period > 0) {
-            // std::cout << "found" << std::endl;
-            return SDL_MapRGBA(renderer::canvas->format, 0, 0, 1023 / (period + 3), 255);
-        }
-        history[n] = mag;
     }
 
     // past the search limit
