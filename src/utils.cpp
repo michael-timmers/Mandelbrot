@@ -33,7 +33,7 @@ void run(bool runProfiling, int numLoops) {
         i++;
 
         SDL_Delay(10);
-    } while ((runProfiling && i < numLoops) || eventHandler::handleInput());
+    } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler::handleInput()));
 }
 
 void kill() {

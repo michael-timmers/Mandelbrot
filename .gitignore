@@ -1,4 +1,5 @@
 **/.DS_Store
 images/
 src/MacBuild
+src/errors
 src/*.trace
