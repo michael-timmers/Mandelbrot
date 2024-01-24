@@ -21,27 +21,35 @@ int init() {
 
 Uint32 fn(double c_x, double c_y, int limit) {
     double z_x = 0, z_y = 0;
-    double tempX, xSquared = 0, ySquared = 0, w = 0;  // tricky variables
-    double mag = 0;
+    double xSquared = 0, ySquared = 0, w = 0;  // tricky variables
+    double tempX, tempY, tempXSq, tempYSq,
+        mag = 0, distance = 0;
     int n = 0;
 
     for (; n < limit; n++) {
+        tempX = z_x;
+        tempY = z_y;
+
         // z=z^2+c
-        tempX = (xSquared - ySquared) + c_x;
+        z_x = (xSquared - ySquared) + c_x;
         z_y = w - mag + c_y;  // 2*x*y+c
-        z_x = tempX;
+
+        tempXSq = xSquared;
+        tempYSq = ySquared;
 
         xSquared = z_x * z_x;
         ySquared = z_y * z_y;
         w = (z_x + z_y) * (z_x + z_y);
 
         mag = xSquared + ySquared;
+        distance += xSquared + 2 * z_x * tempX + tempXSq + ySquared + 2 * z_y * tempY + tempYSq;
+
         if (mag >= 4)
             return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * n / limit, 255);
     }
 
     // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 0, 0, 0, 255);
+    return SDL_MapRGBA(renderer::canvas->format, 0, 0, 255 - 255 * distance / (4 * limit), 255);
 }
 
 // from bound 1 to bound 2

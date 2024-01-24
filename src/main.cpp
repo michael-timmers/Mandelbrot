@@ -6,9 +6,9 @@ int main(void) {
 
     // check if every SDL object was initialised correctly.
     if (utils::init() == 0) {
-        // the rendering loop, pass true for average rendering time
-        // also pass number of loops to get average
-        utils::run(false, 1);
+        // the rendering loop, pass true for limited number of renders
+        // also pass number of loops
+        utils::run(true, 1);
     }
 
     utils::kill();
