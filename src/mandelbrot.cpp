@@ -37,11 +37,11 @@ Uint32 fn(double c_x, double c_y, int limit) {
 
         mag = xSquared + ySquared;
         if (mag >= 4)
-            break;
+            return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * n / limit, 255);
     }
 
     // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 255, 255, 255 - 255 * n / limit, 255);
+    return SDL_MapRGBA(renderer::canvas->format, 0, 0, 0, 255);
 }
 
 // from bound 1 to bound 2
