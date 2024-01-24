@@ -2,7 +2,6 @@
 #include "eventHandler.hpp"
 #include "renderer.hpp"
 #include "mandelbrot.hpp"
-#include "timer.hpp"
 
 namespace utils {
 
