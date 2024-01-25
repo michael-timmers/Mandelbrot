@@ -6,7 +6,8 @@
 
 namespace mandelbrot {
 
-double scale = (double)4 / 800;
+// scale*winWidth = 4
+double scale = (double)4 / winWidth;
 double lowerXBound = -2;
 double lowerYBound = -2;
 
@@ -21,6 +22,10 @@ int init() {
 
 int hyperbolicColour(int scale, int shift, int x) {
     return scale / (x + shift);
+}
+
+Uint32 mapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+    return r << 24 | g << 16 | b << 8 | a;
 }
 
 Uint32 fn(double c_x, double c_y, int limit) {
@@ -46,15 +51,16 @@ Uint32 fn(double c_x, double c_y, int limit) {
         w = (z_x + z_y) * (z_x + z_y);
 
         mag = xSquared + ySquared;
-        distance += xSquared + 2 * z_x * tempX + tempXSq + ySquared + 2 * z_y * tempY + tempYSq;
+        distance += mag - (z_x + z_x) * tempX + tempXSq - (z_y + z_y) * tempY + tempYSq;  // (x2-x1)^2+(y2-y1)^2
         // distance += mag;
     }
 
+    // past range
     if (mag >= 4)
-        return SDL_MapRGBA(renderer::canvas->format, 255, 255, hyperbolicColour(1023, 3, n), 255);
+        return mapRGBA(255, 255, hyperbolicColour(1023, 3, n), 255);
 
-    // past the search limit
-    return SDL_MapRGBA(renderer::canvas->format, 0, 0, hyperbolicColour(32767, 127, distance), 255);
+    // still inside range
+    return mapRGBA(0, 0, 255 - hyperbolicColour(16384, 63, distance), 255);
 }
 
 // from bound 1 to bound 2
@@ -65,9 +71,10 @@ double mapValue(double val, double lower1, double upper1, double lower2, double 
 }
 
 void zoomIn(int x, int y) {
-    double newScale = scale * (double)3 / 4;
     double scaledX = mapValue(x, 0, winWidth, lowerXBound, lowerXBound + scale * winWidth);
     double scaledY = mapValue(y, 0, winHeight, lowerYBound, lowerYBound + scale * winHeight);
+
+    double newScale = scale * (double)3 / 4;
     lowerXBound = scaledX - newScale * x;
     lowerYBound = scaledY - newScale * y;
 

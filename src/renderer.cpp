@@ -80,7 +80,6 @@ void renderMandelbrot(double scale, double xBound, double yBound) {
 
             canvasBuffer[linearPos++] = colour;
         }
-        // std::cout << x << "\n";
     }
     SDL_UnlockSurface(canvas);
 }
