@@ -33,6 +33,13 @@ void run(bool runProfiling, int numLoops) {
     } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler::handleInput()));
 }
 
+void saveAsPng(double lowerXBound, double lowerYBound, double scale){
+    renderer::renderMandelbrot(scale, lowerXBound, lowerYBound);
+    renderer::updateWindowSurfaceWithCanvas();
+
+    renderer::saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
+}
+
 void kill() {
     renderer::kill();
 

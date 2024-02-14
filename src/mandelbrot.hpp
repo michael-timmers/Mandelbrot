@@ -16,4 +16,9 @@ Uint32 fn(double c_x, double c_y, int n);
 void zoomIn(int x, int y);
 void zoomOut(int x, int y);
 
+void panLeft();
+void panRight();
+void panUp();
+void panDown();
+void reset();
 }  // namespace mandelbrot

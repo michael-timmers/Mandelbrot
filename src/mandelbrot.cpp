@@ -7,9 +7,10 @@
 namespace mandelbrot {
 
 // scale*winWidth = 4
-double scale = (double)4 / winWidth;
+double scale = (double)3 / winWidth;
 double lowerXBound = -2;
-double lowerYBound = -2;
+double lowerYBound = -1.5;
+double panDistance = winWidth / 4;
 
 // colour lookup tables
 // std::unordered_map<int, Uint8> escapeColours;
@@ -95,6 +96,28 @@ void zoomOut(int x, int y) {
 
     // std::cout << "zooming into " << scaledX << "," << scaledY << " or: " << x << ", " << y << "\n";
     // std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
+}
+
+void panLeft() {
+    lowerXBound += scale * panDistance;
+}
+
+void panRight() {
+    lowerXBound -= scale * panDistance;
+}
+
+void panUp() {
+    lowerYBound -= scale * panDistance;
+}
+
+void panDown() {
+    lowerYBound += scale * panDistance;
+}
+
+void reset() {
+    lowerXBound = -2;
+    lowerYBound = -1.5;
+    scale = (double)3 / winWidth;
 }
 
 }  // namespace mandelbrot

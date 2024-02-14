@@ -7,41 +7,53 @@ namespace eventHandler {
 SDL_Event event;
 
 bool handleInput() {
-    while (true) {
-        if (SDL_PollEvent(&event)) {
-            switch (event.type) {
-                case SDL_QUIT:
-                    return false;
-                    break;
-                case SDL_MOUSEBUTTONDOWN:
-                    switch (event.button.button) {
-                        case SDL_BUTTON_LEFT:
-                            int x, y;
-                            SDL_GetMouseState(&x, &y);
-                            mandelbrot::zoomIn(x, y);  // since 0, 0 is top left
-                            return true;
+    SDL_WaitEvent(&event);
 
-                        default:
-                            break;
-                    }
-                case SDL_KEYDOWN:
-                    switch (event.key.keysym.sym) {
-                        case SDLK_SPACE:
-                            int x, y;
-                            SDL_GetMouseState(&x, &y);
-                            mandelbrot::zoomOut(x, y);
-                            return true;
+    switch (event.type) {
+        case SDL_QUIT:
+            return false;
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            switch (event.button.button) {
+                case SDL_BUTTON_LEFT:
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    mandelbrot::zoomIn(x, y);  // since 0, 0 is top left
+                    return true;
 
-                        default:
-                            break;
-                    }
-                    break;
                 default:
                     break;
             }
-        }
-        SDL_Delay(10);
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym) {
+                case SDLK_SPACE:
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    mandelbrot::zoomOut(x, y);
+                    return true;
+                case SDLK_r:
+                    mandelbrot::reset();
+                    return true;
+                case SDLK_LEFT:
+                    mandelbrot::panLeft();
+                    return true;
+                case SDLK_RIGHT:
+                    mandelbrot::panRight();
+                    return true;
+                case SDLK_UP:
+                    mandelbrot::panUp();
+                    return true;
+                case SDLK_DOWN:
+                    mandelbrot::panDown();
+                    return true;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
     }
+    return true;
 }
 
 }  // namespace eventHandler

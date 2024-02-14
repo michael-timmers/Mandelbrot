@@ -84,6 +84,10 @@ void renderMandelbrot(double scale, double xBound, double yBound) {
     SDL_UnlockSurface(canvas);
 }
 
+void saveAsPng(const char* path){
+    IMG_SavePNG(window_surface, path);
+}
+
 void present() {
     SDL_RenderPresent(renderer);
 }
