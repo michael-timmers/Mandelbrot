@@ -2,7 +2,6 @@
 
 #include "headers.hpp"
 #include "mandelbrot.hpp"
-#include "renderer.hpp"
 
 namespace mandelbrot {
 
@@ -11,10 +10,6 @@ double scale = (double)3 / winWidth;
 double lowerXBound = -2;
 double lowerYBound = -1.5;
 double panDistance = winWidth / 4;
-
-// colour lookup tables
-// std::unordered_map<int, Uint8> escapeColours;
-// std::unordered_map<int, Uint8> periodColours;
 
 // initialise colour lookup tables
 int init() {

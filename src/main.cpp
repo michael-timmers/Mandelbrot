@@ -10,7 +10,7 @@ int main(void) {
         // also pass num    ber of loops
         utils::run(false, 1);
 
-        //otherwise generate an image
+        // otherwise generate an image
         // utils::saveAsPng();
     }
 
