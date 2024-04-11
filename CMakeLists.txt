@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16.3)
 project(Mandelbrot
 	VERSION 1.0
-	DESCRIPTION "A programming for displaying the Mandelbrot set"
+	DESCRIPTION "A program for displaying the Mandelbrot set"
 	LANGUAGES CXX)
 
 #C++ version
