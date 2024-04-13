@@ -47,5 +47,3 @@ class Renderer {
     // destroys the variables
     ~Renderer();
 };
-
-extern Renderer renderer;

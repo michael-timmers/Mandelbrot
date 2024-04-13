@@ -5,14 +5,14 @@
 
 namespace utils {
 
+Renderer renderer;
+
 void intro() {
     std::cout << "mandelbrot Set\n";
 }
 
 int init() {
     SDL_Init(SDL_INIT_VIDEO);
-
-    Renderer renderer();
 
     return 0;  // success
 }
@@ -24,7 +24,7 @@ void run(bool runProfiling, int numLoops) {
     do {
         renderer.renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
 
-        renderer::updateWindowSurfaceWithCanvas();
+        renderer.updateWindowSurfaceWithCanvas();
 
         i++;
 
@@ -33,15 +33,13 @@ void run(bool runProfiling, int numLoops) {
 }
 
 void saveAsPng(double lowerXBound, double lowerYBound, double scale) {
-    renderer::renderMandelbrot(scale, lowerXBound, lowerYBound);
-    renderer::updateWindowSurfaceWithCanvas();
+    renderer.renderMandelbrot(scale, lowerXBound, lowerYBound);
+    renderer.updateWindowSurfaceWithCanvas();
 
-    renderer::saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
+    renderer.saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
 }
 
 void kill() {
-    renderer::kill();
-
     SDL_Quit();
 }
 }  // namespace utils
