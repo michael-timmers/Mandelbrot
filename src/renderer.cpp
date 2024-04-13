@@ -57,10 +57,13 @@ void Renderer::renderMandelbrot(double scale, double xBound, double yBound) {
         }
     }
     SDL_UnlockSurface(this->canvas);
+    std::cout << std::hex << colour << "\n"
+              << canvasBuffer[320001] << "\n";
 }
 
 void Renderer::saveAsPng(const char *path) {
-    IMG_SavePNG(window_surface, path);
+    std::cout << "point" << std::endl;
+    IMG_SavePNG(this->window_surface, path);
 }
 
 void Renderer::present() {
