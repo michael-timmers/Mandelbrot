@@ -13,7 +13,6 @@ class Renderer {
 
     // changable.
     SDL_Color backgroundColour = {255, 255, 255};
-    int lineThickness = 6;
 
    public:
     SDL_Surface* canvas;

@@ -35,12 +35,6 @@ void Renderer::changeRendrTarget(SDL_Texture *targetTex) {
     SDL_SetRenderTarget(renderer, targetTex);
 }
 
-// draws a thick line, mostly for accessibility
-void Renderer::drawThickLine(int x1, int y1, int x2, int y2, int thickness = lineThickness) {
-    for (int j = -thickness / 2; j < thickness / 2; j++)
-        SDL_RenderDrawLine(renderer, x1 + j, y1, x2 + j, y2);
-}
-
 void Renderer::drawPoint(int x, int y) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     SDL_RenderDrawPoint(renderer, x, y);
