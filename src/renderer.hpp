@@ -9,14 +9,17 @@ class Renderer {
 
     // for fast access to pixels of window
     SDL_Surface* window_surface;
+
+   public:
+    SDL_Surface* canvas;
+
+   private:
     Uint32* canvasBuffer;
 
     // changable.
     SDL_Color backgroundColour = {255, 255, 255};
 
    public:
-    SDL_Surface* canvas;
-
     // set up renderer and window
     Renderer();
 

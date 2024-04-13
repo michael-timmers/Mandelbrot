@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "headers.hpp"
 #include "eventHandler.hpp"
 #include "renderer.hpp"
@@ -5,7 +7,7 @@
 
 namespace utils {
 
-Renderer renderer;
+std::unique_ptr<Renderer> renderer;
 
 void intro() {
     std::cout << "mandelbrot Set\n";
@@ -13,6 +15,8 @@ void intro() {
 
 int init() {
     SDL_Init(SDL_INIT_VIDEO);
+
+    renderer = std::make_unique<Renderer>();
 
     return 0;  // success
 }
@@ -22,9 +26,9 @@ void run(bool runProfiling, int numLoops) {
 
     // event handler loops until input is given, then things are updated..
     do {
-        renderer.renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
+        renderer->renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
 
-        renderer.updateWindowSurfaceWithCanvas();
+        renderer->updateWindowSurfaceWithCanvas();
 
         i++;
 
@@ -33,10 +37,10 @@ void run(bool runProfiling, int numLoops) {
 }
 
 void saveAsPng(double lowerXBound, double lowerYBound, double scale) {
-    renderer.renderMandelbrot(scale, lowerXBound, lowerYBound);
-    renderer.updateWindowSurfaceWithCanvas();
+    renderer->renderMandelbrot(scale, lowerXBound, lowerYBound);
+    renderer->updateWindowSurfaceWithCanvas();
 
-    renderer.saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
+    renderer->saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
 }
 
 void kill() {
