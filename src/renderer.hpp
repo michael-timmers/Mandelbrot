@@ -9,11 +9,7 @@ class Renderer {
 
     // for fast access to pixels of window
     SDL_Surface* window_surface;
-
-   public:
     SDL_Surface* canvas;
-
-   private:
     Uint32* canvasBuffer;
 
     // changable.
