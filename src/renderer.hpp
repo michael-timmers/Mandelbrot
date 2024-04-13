@@ -2,38 +2,51 @@
 
 #include "headers.hpp"
 
-namespace renderer {
+class Renderer {
+    // SDL variables
+    SDL_Renderer* renderer;
+    SDL_Window* window;
 
-extern SDL_Surface* canvas;
+    // for fast access to pixels of window
+    SDL_Surface* window_surface;
+    Uint32* canvasBuffer;
 
-// set up renderer and window
-int init();
+    // changable.
+    SDL_Color backgroundColour = {255, 255, 255};
+    int lineThickness = 6;
 
-// clears the renderer
-void clear();
+   public:
+    SDL_Surface* canvas;
 
-void renderCopy(SDL_Texture* tex, const SDL_Rect* src, const SDL_Rect* dst);
+    // set up renderer and window
+    Renderer();
 
-SDL_Texture* createTexture(Uint32 format, int access, int w, int h);
+    // clears the renderer
+    void clear();
 
-// returns a texture that was made from a surface
-SDL_Texture* CreateTextureFromSurface(SDL_Surface* surface);
+    void renderCopy(SDL_Texture* tex, const SDL_Rect* src, const SDL_Rect* dst);
 
-// changes the render target
-void changeRendrTarget(SDL_Texture* targetTex = NULL);
+    SDL_Texture* createTexture(Uint32 format, int access, int w, int h);
 
-void drawPoint(int x, int y);
+    // returns a texture that was made from a surface
+    SDL_Texture* CreateTextureFromSurface(SDL_Surface* surface);
 
-void renderMandelbrot(double scale, double xOffset, double yOffset);
+    // changes the render target
+    void changeRendrTarget(SDL_Texture* targetTex = NULL);
 
-void saveAsPng(const char* path);
+    void drawPoint(int x, int y);
 
-// presents the renderer
-void present();
+    void renderMandelbrot(double scale, double xOffset, double yOffset);
 
-void updateWindowSurfaceWithCanvas();
+    void saveAsPng(const char* path);
 
-// destroys the variables
-void kill();
+    // presents the renderer
+    void present();
 
-}  // namespace renderer
+    void updateWindowSurfaceWithCanvas();
+
+    // destroys the variables
+    ~Renderer();
+};
+
+extern Renderer renderer;
