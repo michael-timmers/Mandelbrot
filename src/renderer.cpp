@@ -58,8 +58,6 @@ void Renderer::renderMandelbrot(double scale, double xBound, double yBound) {
         }
     }
     SDL_UnlockSurface(this->canvas);
-    std::cout << std::hex << colour << "\n"
-              << canvasBuffer[320001] << "\n";
 }
 
 void Renderer::saveAsPng(const char *path) {

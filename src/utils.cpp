@@ -44,6 +44,8 @@ void saveAsPng(double lowerXBound, double lowerYBound, double scale) {
 }
 
 void kill() {
+    renderer->~Renderer();
+
     SDL_Quit();
 }
 }  // namespace utils
