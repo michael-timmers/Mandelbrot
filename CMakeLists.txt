@@ -30,8 +30,8 @@ add_executable(Mandelbrot
 	src/mandelbrot.hpp
 	src/renderer.cpp
 	src/renderer.hpp
-	src/utils.cpp
-	src/utils.hpp
+	src/appmanager.cpp
+	src/appmanager.hpp
 )
 
 target_link_libraries(Mandelbrot ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
