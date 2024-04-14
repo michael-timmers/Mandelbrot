@@ -1,13 +1,12 @@
 #pragma once
 
 #include <iostream>
-#include <string>
 
+// very hacky, but removes red squiggles.
+#ifndef __INTELLISENSE__
 #include <SDL.h>
 #include <SDL_image.h>
-
-// conveniences
-using std::string;
+#endif
 
 // all the extern variables
 #include "globals.hpp"
