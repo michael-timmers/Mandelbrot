@@ -6,6 +6,7 @@
 
 Renderer::Renderer()
     : window(SDL_CreateWindow("Mandelbrot Set", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, winWidth, winHeight, SDL_WINDOW_RESIZABLE | SDL_WINDOW_INPUT_GRABBED)),
+      window_surface(SDL_GetWindowSurface(window)),
       //  renderer(SDL_CreateRenderer(window, -1, 0 /*SDL_RENDERER_TARGETTEXTURE*/)),  // allows for rendering on textures.
       canvas(SDL_CreateRGBSurfaceWithFormat(
           0, winWidth, winHeight, 32, SDL_PIXELFORMAT_RGBA8888)),
