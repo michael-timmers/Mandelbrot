@@ -10,8 +10,8 @@ Renderer::Renderer()
       //  renderer(SDL_CreateRenderer(window, -1, 0 /*SDL_RENDERER_TARGETTEXTURE*/)),  // allows for rendering on textures.
       canvas(SDL_CreateRGBSurfaceWithFormat(
           0, winWidth, winHeight, 32, SDL_PIXELFORMAT_RGBA8888)),
-      canvasBuffer((Uint32 *)canvas->pixels) {
-    // clear();
+      canvasBuffer(static_cast<Uint32 *>(canvas->pixels)) {
+    std::cout << "renderer constructed" << std::endl;
 }
 
 void Renderer::clear() {
@@ -79,4 +79,5 @@ Renderer::~Renderer() {
     SDL_FreeSurface(this->window_surface);
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
+    std::cout << "renderer destructed" << std::endl;
 }

@@ -8,6 +8,9 @@ class AppManager {
     std::unique_ptr<Renderer> renderer;
 
    public:
+    AppManager();
+    ~AppManager();
+
     // a console output
     void intro();
 

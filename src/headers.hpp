@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-// very hacky, but removes red squiggles.
+// very hacky, but gets rid of those red squiggles.
 #ifndef __INTELLISENSE__
 #include <SDL.h>
 #include <SDL_image.h>

@@ -6,14 +6,21 @@
 #include "renderer.hpp"
 #include "mandelbrot.hpp"
 
+AppManager::AppManager()
+    : renderer(std::make_unique<Renderer>()) {
+    std::cout << "app constructed" << std::endl;
+}
+
+AppManager::~AppManager() {
+    std::cout << "app destructed" << std::endl;
+}
+
 void AppManager::intro() {
     std::cout << "mandelbrot Set\n";
 }
 
 int AppManager::init() {
     SDL_Init(SDL_INIT_VIDEO);
-
-    renderer = std::make_unique<Renderer>();
 
     return 0;  // success
 }
