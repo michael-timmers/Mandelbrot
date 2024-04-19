@@ -16,7 +16,7 @@ int main(void) {
         // app.saveAsPng();
     }
 
-    app.kill();
+    app.quit();
 
     return 0;
 }

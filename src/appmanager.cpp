@@ -47,7 +47,7 @@ void AppManager::saveAsPng(double lowerXBound, double lowerYBound, double scale)
     renderer->saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
 }
 
-void AppManager::kill() {
+void AppManager::quit() {
     SDL_Quit();
     std::cout << "qquit" << std::endl;
 }
