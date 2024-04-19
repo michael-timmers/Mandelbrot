@@ -48,8 +48,6 @@ void AppManager::saveAsPng(double lowerXBound, double lowerYBound, double scale)
 }
 
 void AppManager::kill() {
-    renderer->~Renderer();
-
     SDL_Quit();
     std::cout << "qquit" << std::endl;
 }

@@ -10,10 +10,10 @@ int main(void) {
     if (app.init() == 0) {
         // the rendering loop, pass true for limited number of renders
         // also pass num    ber of loops
-        // app.run(false, 1);
+        app.run(false, 1);
 
         // otherwise generate an image
-        app.saveAsPng();
+        // app.saveAsPng();
     }
 
     app.kill();

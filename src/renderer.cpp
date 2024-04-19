@@ -75,9 +75,10 @@ void Renderer::updateWindowSurfaceWithCanvas() {
 }
 
 Renderer::~Renderer() {
-    SDL_FreeSurface(this->canvas);
-    SDL_FreeSurface(this->window_surface);
-    SDL_DestroyRenderer(this->renderer);
+    std::cout << "renderer destructing" << std::endl;
+    // SDL_FreeSurface(this->canvas);
+    // SDL_FreeSurface(this->window_surface);
+    // SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
     std::cout << "renderer destructed" << std::endl;
 }
