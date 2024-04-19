@@ -8,7 +8,8 @@
 
 AppManager::AppManager()
     : renderer(std::make_unique<Renderer>()),
-      mandelbrot(std::make_unique<Mandelbrot>()) {
+      mandelbrot(std::make_unique<Mandelbrot>()),
+      eventHandler(std::make_unique<EventHandler>()) {
     std::cout << "app constructed" << std::endl;
 }
 
@@ -33,7 +34,7 @@ void AppManager::run(bool runProfiling, int numLoops) {
         i++;
 
         SDL_Delay(10);
-    } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler::handleInput(mandelbrot)));
+    } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler->handleInput(mandelbrot)));
 }
 
 void AppManager::saveAsPng() {

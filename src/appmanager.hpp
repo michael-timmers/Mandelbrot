@@ -3,10 +3,12 @@
 
 #include "mandelbrot.hpp"
 #include "renderer.hpp"
+#include "eventHandler.hpp"
 
 class AppManager {
     std::unique_ptr<Renderer> renderer;
     std::unique_ptr<Mandelbrot> mandelbrot;
+    std::unique_ptr<EventHandler> eventHandler;
 
    public:
     AppManager();

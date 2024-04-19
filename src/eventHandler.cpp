@@ -1,12 +1,8 @@
 #include "headers.hpp"
+#include "eventHandler.hpp"
 #include "mandelbrot.hpp"
 
-namespace eventHandler {
-
-// SDL variable
-SDL_Event event;
-
-bool handleInput(const std::unique_ptr<Mandelbrot>& mandelbrot) {
+bool EventHandler::handleInput(const std::unique_ptr<Mandelbrot>& mandelbrot) {
     SDL_WaitEvent(&event);
 
     switch (event.type) {
@@ -55,5 +51,3 @@ bool handleInput(const std::unique_ptr<Mandelbrot>& mandelbrot) {
     }
     return true;
 }
-
-}  // namespace eventHandler
