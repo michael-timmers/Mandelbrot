@@ -7,7 +7,8 @@
 #include "mandelbrot.hpp"
 
 AppManager::AppManager()
-    : renderer(std::make_unique<Renderer>()) {
+    : renderer(std::make_unique<Renderer>()),
+      mandelbrot(std::make_unique<Mandelbrot>()) {
     std::cout << "app constructed" << std::endl;
 }
 
@@ -25,18 +26,18 @@ void AppManager::run(bool runProfiling, int numLoops) {
 
     // event handler loops until input is given, then things are updated..
     do {
-        renderer->renderMandelbrot(mandelbrot::scale, mandelbrot::lowerXBound, mandelbrot::lowerYBound);
+        renderer->renderMandelbrot(mandelbrot);
 
         renderer->updateWindowSurfaceWithCanvas();
 
         i++;
 
         SDL_Delay(10);
-    } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler::handleInput()));
+    } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler::handleInput(mandelbrot)));
 }
 
-void AppManager::saveAsPng(double lowerXBound, double lowerYBound, double scale) {
-    renderer->renderMandelbrot(scale, lowerXBound, lowerYBound);
+void AppManager::saveAsPng() {
+    renderer->renderMandelbrot(mandelbrot);
     renderer->updateWindowSurfaceWithCanvas();
 
     renderer->saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());

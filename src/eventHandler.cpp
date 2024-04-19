@@ -6,7 +6,7 @@ namespace eventHandler {
 // SDL variable
 SDL_Event event;
 
-bool handleInput() {
+bool handleInput(const std::unique_ptr<Mandelbrot>& mandelbrot) {
     SDL_WaitEvent(&event);
 
     switch (event.type) {
@@ -18,7 +18,7 @@ bool handleInput() {
                 case SDL_BUTTON_LEFT:
                     int x, y;
                     SDL_GetMouseState(&x, &y);
-                    mandelbrot::zoomIn(x, y);  // since 0, 0 is top left
+                    mandelbrot->zoomIn(x, y);  // since 0, 0 is top left
                     return true;
 
                 default:
@@ -29,22 +29,22 @@ bool handleInput() {
                 case SDLK_SPACE:
                     int x, y;
                     SDL_GetMouseState(&x, &y);
-                    mandelbrot::zoomOut(x, y);
+                    mandelbrot->zoomOut(x, y);
                     return true;
                 case SDLK_r:
-                    mandelbrot::reset();
+                    mandelbrot->reset();
                     return true;
                 case SDLK_LEFT:
-                    mandelbrot::panLeft();
+                    mandelbrot->panLeft();
                     return true;
                 case SDLK_RIGHT:
-                    mandelbrot::panRight();
+                    mandelbrot->panRight();
                     return true;
                 case SDLK_UP:
-                    mandelbrot::panUp();
+                    mandelbrot->panUp();
                     return true;
                 case SDLK_DOWN:
-                    mandelbrot::panDown();
+                    mandelbrot->panDown();
                     return true;
                 default:
                     break;

@@ -6,6 +6,7 @@
 
 class AppManager {
     std::unique_ptr<Renderer> renderer;
+    std::unique_ptr<Mandelbrot> mandelbrot;
 
    public:
     AppManager();
@@ -18,7 +19,7 @@ class AppManager {
 
     void run(bool runProfiling = false, int numLoops = 5);
 
-    void saveAsPng(double lowerXBound = mandelbrot::lowerXBound, double lowerYBound = mandelbrot::lowerYBound, double scale = mandelbrot::scale);
+    void saveAsPng();
 
     // destroys all variables from SDL
     void quit();

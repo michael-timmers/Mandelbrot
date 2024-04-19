@@ -13,17 +13,17 @@ Renderer::Renderer()
     std::cout << "renderer constructed" << std::endl;
 }
 
-void Renderer::renderMandelbrot(double scale, double xBound, double yBound) {
+void Renderer::renderMandelbrot(const std::unique_ptr<Mandelbrot> &mandelbrot) {
     Uint32 colour;
 
-    double scaledX, scaledY = yBound;
+    double scaledX, scaledY = mandelbrot->lowerYBound;
     int linearPos = 0;
 
     SDL_LockSurface(this->canvas);
-    for (int y = 0; y < winHeight; y++, scaledY += scale) {
-        scaledX = xBound;
-        for (int x = 0; x < winWidth; x++, scaledX += scale) {
-            colour = mandelbrot::fn(scaledX, scaledY, SEARCH_LIMIT);
+    for (int y = 0; y < winHeight; y++, scaledY += mandelbrot->scale) {
+        scaledX = mandelbrot->lowerXBound;
+        for (int x = 0; x < winWidth; x++, scaledX += mandelbrot->scale) {
+            colour = mandelbrot->fn(scaledX, scaledY, SEARCH_LIMIT);
 
             this->canvasBuffer[linearPos++] = colour;
         }

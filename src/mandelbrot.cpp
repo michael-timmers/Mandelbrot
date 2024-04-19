@@ -3,17 +3,11 @@
 #include "headers.hpp"
 #include "mandelbrot.hpp"
 
-namespace mandelbrot {
-
-// scale*winWidth = 4
-double scale = (double)3 / winWidth;
-double lowerXBound = -2;
-double lowerYBound = -1.5;
-double panDistance = winWidth / 4;
-
-// initialise colour lookup tables
-int init() {
-    return 0;
+Mandelbrot::Mandelbrot()
+    : scale((double)3 / winWidth),  // scale*winWidth = 4
+      lowerXBound(-2),
+      lowerYBound(-1.5),
+      panDistance(winWidth / 4) {
 }
 
 int hyperbolicColour(int scale, int shift, int x) {
@@ -24,7 +18,7 @@ Uint32 mapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     return r << 24 | g << 16 | b << 8 | a;
 }
 
-Uint32 fn(double c_x, double c_y, int limit) {
+Uint32 Mandelbrot::fn(double c_x, double c_y, int limit) {
     double z_x = 0, z_y = 0;
     double xSquared = 0, ySquared = 0, w = 0;  // tricky variables
     double tempX, tempY, tempXSq, tempYSq,
@@ -66,7 +60,7 @@ double mapValue(double val, double lower1, double upper1, double lower2, double 
     return (val + originDistance1) / diff1 * diff2 - originDistance2;
 }
 
-void zoomIn(int x, int y) {
+void Mandelbrot::zoomIn(int x, int y) {
     double scaledX = mapValue(x, 0, winWidth, lowerXBound, lowerXBound + scale * winWidth);
     double scaledY = mapValue(y, 0, winHeight, lowerYBound, lowerYBound + scale * winHeight);
 
@@ -80,7 +74,7 @@ void zoomIn(int x, int y) {
     // std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
 }
 
-void zoomOut(int x, int y) {
+void Mandelbrot::zoomOut(int x, int y) {
     double newScale = scale * (double)4 / 3;
     double scaledX = mapValue(x, 0, winWidth, lowerXBound, lowerXBound + scale * winWidth);
     double scaledY = mapValue(y, 0, winHeight, lowerYBound, lowerYBound + scale * winHeight);
@@ -93,26 +87,24 @@ void zoomOut(int x, int y) {
     // std::cout << "bounds:" << lowerXBound << "," << lowerYBound << "\n";
 }
 
-void panLeft() {
+void Mandelbrot::panLeft() {
     lowerXBound += scale * panDistance;
 }
 
-void panRight() {
+void Mandelbrot::panRight() {
     lowerXBound -= scale * panDistance;
 }
 
-void panUp() {
+void Mandelbrot::panUp() {
     lowerYBound -= scale * panDistance;
 }
 
-void panDown() {
+void Mandelbrot::panDown() {
     lowerYBound += scale * panDistance;
 }
 
-void reset() {
+void Mandelbrot::reset() {
     lowerXBound = -2;
     lowerYBound = -1.5;
     scale = (double)3 / winWidth;
 }
-
-}  // namespace mandelbrot

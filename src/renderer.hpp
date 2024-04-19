@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "headers.hpp"
+#include "mandelbrot.hpp"
 
 class Renderer {
     // SDL variables
@@ -18,7 +21,7 @@ class Renderer {
     // set up renderer and window
     Renderer();
 
-    void renderMandelbrot(double scale, double xOffset, double yOffset);
+    void renderMandelbrot(const std::unique_ptr<Mandelbrot>& mandelbrot);
 
     void saveAsPng(const char* path);
 
