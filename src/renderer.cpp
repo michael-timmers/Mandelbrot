@@ -32,7 +32,6 @@ void Renderer::renderMandelbrot(double scale, double xBound, double yBound) {
 }
 
 void Renderer::saveAsPng(const char *path) {
-    std::cout << "point" << std::endl;
     IMG_SavePNG(this->window_surface, path);
 }
 

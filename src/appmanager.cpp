@@ -11,17 +11,12 @@ AppManager::AppManager()
     std::cout << "app constructed" << std::endl;
 }
 
-AppManager::~AppManager() {
-    std::cout << "app destructed" << std::endl;
-}
-
 void AppManager::intro() {
     std::cout << "mandelbrot Set\n";
 }
 
 int AppManager::init() {
     SDL_Init(SDL_INIT_VIDEO);
-
     return 0;  // success
 }
 
@@ -50,4 +45,8 @@ void AppManager::saveAsPng(double lowerXBound, double lowerYBound, double scale)
 void AppManager::quit() {
     SDL_Quit();
     std::cout << "qquit" << std::endl;
+}
+
+AppManager::~AppManager() {
+    std::cout << "app destructed" << std::endl;
 }

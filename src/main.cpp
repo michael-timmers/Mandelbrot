@@ -3,10 +3,9 @@
 
 int main(void) {
     AppManager app;
-
     app.intro();  // just messages
 
-    // check if every SDL object was initialised correctly.
+    // check if SDL was initialised correctly.
     if (app.init() == 0) {
         // the rendering loop, pass true for limited number of renders
         // also pass num    ber of loops

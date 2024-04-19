@@ -9,7 +9,6 @@ class AppManager {
 
    public:
     AppManager();
-    ~AppManager();
 
     // a console output
     void intro();
@@ -21,6 +20,8 @@ class AppManager {
 
     void saveAsPng(double lowerXBound = mandelbrot::lowerXBound, double lowerYBound = mandelbrot::lowerYBound, double scale = mandelbrot::scale);
 
-    // destroys all variables from SDL and TTF
+    // destroys all variables from SDL
     void quit();
+
+    ~AppManager();
 };
