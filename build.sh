@@ -4,3 +4,4 @@
 rm -fr build
 mkdir build
 cmake -B build -S .
+
