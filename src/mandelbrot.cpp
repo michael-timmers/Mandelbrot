@@ -10,38 +10,36 @@ Mandelbrot::Mandelbrot()
       panDistance(winWidth / 4) {
 }
 
-int hyperbolicColour(int scale, int shift, int x) {
-    return scale / (x + shift);
+int Mandelbrot::hyperbolicColour(int dilation, int shift, int x) {
+    return dilation / (x + shift);
 }
 
-Uint32 mapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+Uint32 Mandelbrot::mapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     return r << 24 | g << 16 | b << 8 | a;
 }
 
 Uint32 Mandelbrot::fn(double c_x, double c_y, int limit) {
-    double z_x = 0, z_y = 0;
-    double xSquared = 0, ySquared = 0, w = 0;  // tricky variables
-    double tempX, tempY, tempXSq, tempYSq,
-        mag = 0, distance = 0;
+    double z_x = 0, z_y = 0, xSquared = 0, ySquared = 0,
+           z_x2, z_y2, xSquared2, ySquared2,
+           w = 0, mag = 0, distance = 0;
     int n = 0;
 
     for (; n < limit && mag < 4; n++) {
-        tempX = z_x;
-        tempY = z_y;
+        z_x2 = z_x;
+        z_y2 = z_y;
+        xSquared2 = xSquared;
+        ySquared2 = ySquared;
 
         // z=z^2+c
         z_x = (xSquared - ySquared) + c_x;
         z_y = w - mag + c_y;  // 2*x*y+c
-
-        tempXSq = xSquared;
-        tempYSq = ySquared;
 
         xSquared = z_x * z_x;
         ySquared = z_y * z_y;
         w = (z_x + z_y) * (z_x + z_y);
 
         mag = xSquared + ySquared;
-        distance += mag - (z_x + z_x) * tempX + tempXSq - (z_y + z_y) * tempY + tempYSq;  // (x2-x1)^2+(y2-y1)^2
+        distance += mag - (z_x + z_x) * z_x2 + xSquared2 - (z_y + z_y) * z_y2 + ySquared2;  // (x2-x1)^2+(y2-y1)^2
         // distance += mag;
     }
 

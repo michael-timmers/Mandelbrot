@@ -2,7 +2,7 @@
 
 This is a basic c++ implimentation of generating the Mandelbrot set. It supports zooming, panning and reseting back to the original view.
 
-It does not currently use GPU acceleration, which would make it less portable to platforms other than an Apple silicon Mac. This is still a goal.
+It does not currently use GPU acceleration, which would make it less portable to other platforms. This is still a goal.
 
 ## Requirements
 
@@ -14,3 +14,9 @@ It does not currently use GPU acceleration, which would make it less portable to
 
 to compile, create a build folder, run 'cmake ..' and then 'make'.
 Run with './Mandelbrot'.
+
+## License
+### GPL3
+
+[250 steps Mandelbrot set](https://github/michael-timmers/mandelbrot/images/img250.png)
+

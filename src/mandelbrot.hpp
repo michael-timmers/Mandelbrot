@@ -22,4 +22,8 @@ class Mandelbrot {
     void panUp();
     void panDown();
     void reset();
+
+   private:
+    int hyperbolicColour(int dilation, int shift, int x);
+    Uint32 mapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 };
