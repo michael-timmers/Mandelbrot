@@ -31,10 +31,8 @@ void AppManager::run(bool runProfiling, int numLoops) {
 
         renderer->updateWindowSurfaceWithCanvas();
 
-        i++;
-
         SDL_Delay(10);
-    } while ((runProfiling && i < numLoops) || (!runProfiling && eventHandler->handleInput(mandelbrot)));
+    } while ((runProfiling && i++ < numLoops) || (!runProfiling && eventHandler->handleInput(mandelbrot)));
 }
 
 void AppManager::saveAsPng() {
