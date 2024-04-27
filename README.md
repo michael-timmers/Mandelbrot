@@ -18,5 +18,4 @@ Run with './Mandelbrot'.
 ## License
 ### GPL3
 
-![200 steps Mandelbrot set](images/img200.png)
-![50000 steps Mandelbrot set](images/img50000.png)
+![200 steps Mandelbrot set](images/img200.png) ![50000 steps Mandelbrot set](images/img50000.png)
