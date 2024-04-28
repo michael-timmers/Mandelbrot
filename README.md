@@ -15,6 +15,12 @@ It does not currently use GPU acceleration, which would make it less portable to
 to compile, create a build folder, run 'cmake ..' and then 'make'.
 Run with './Mandelbrot'.
 
+## App controls
+- click to zoom in at mouse position.
+- Space bar to zoom out at mouse position.
+- Arrow keys to pan.
+- r key to reset
+
 ## License
 ### [GPL3](license.txt)
 
