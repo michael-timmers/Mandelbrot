@@ -25,3 +25,7 @@ Run with './Mandelbrot'.
 ### [GPL3](license.txt)
 
 <img alt="200 Steps mandelbrot set" src="images/img200.png" width="50%"><img alt="50000 Steps mandelbrot set" src="images/img50000.png" width="50%">
+
+## Meaning of Colours
+- Blue is part of the set. The hue shows the distance that was travelled (darker is further).
+- Yellow is not part of the set. The hue will be darker if the distance traveled was longer.
