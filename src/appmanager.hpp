@@ -17,18 +17,9 @@ class AppManager {
 
     AppManager(const int _SEARCH_LIMIT);
 
-    // a console output
-    void intro();
-
-    // initialises all SDL and TTF variables
-    int init();
-
     void run(bool runProfiling = false, int numLoops = 5);
 
     void saveAsPng();
-
-    // destroys all variables from SDL
-    void quit();
 
     ~AppManager();
 };

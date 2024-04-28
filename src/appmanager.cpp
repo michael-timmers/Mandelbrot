@@ -11,16 +11,8 @@ AppManager::AppManager(const int _SEARCH_LIMIT)
       mandelbrot(std::make_unique<Mandelbrot>()),
       eventHandler(std::make_unique<EventHandler>()),
       SEARCH_LIMIT(_SEARCH_LIMIT) {
-    std::cout << "app constructed" << std::endl;
-}
-
-void AppManager::intro() {
-    std::cout << "mandelbrot Set\n";
-}
-
-int AppManager::init() {
     SDL_Init(SDL_INIT_VIDEO);
-    return 0;  // success
+    std::cout << "mandelbrot Set\n";
 }
 
 void AppManager::run(bool runProfiling, int numLoops) {
@@ -43,11 +35,7 @@ void AppManager::saveAsPng() {
     renderer->saveAsPng(("../images/img" + std::to_string(SEARCH_LIMIT) + ".png").c_str());
 }
 
-void AppManager::quit() {
+AppManager::~AppManager() {
     SDL_Quit();
     std::cout << "qquit" << std::endl;
-}
-
-AppManager::~AppManager() {
-    std::cout << "app destructed" << std::endl;
 }
