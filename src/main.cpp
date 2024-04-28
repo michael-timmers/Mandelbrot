@@ -2,7 +2,8 @@
 #include "appmanager.hpp"
 
 int main(void) {
-    AppManager app;
+    // pass number of stelps to take
+    AppManager app(250);
     app.intro();  // just messages
 
     // check if SDL was initialised correctly.

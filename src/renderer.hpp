@@ -2,8 +2,11 @@
 
 #include <memory>
 
+class Renderer;
+
 #include "headers.hpp"
 #include "mandelbrot.hpp"
+#include "appmanager.hpp"
 
 class Renderer {
     // SDL variables
@@ -17,9 +20,11 @@ class Renderer {
     // changable.
     SDL_Color backgroundColour = {255, 255, 255};
 
+    AppManager* app;
+
    public:
     // set up renderer and window
-    Renderer();
+    Renderer(AppManager* _app);
 
     void renderMandelbrot(const std::unique_ptr<Mandelbrot>& mandelbrot);
 

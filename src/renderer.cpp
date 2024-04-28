@@ -3,13 +3,15 @@
 #include "headers.hpp"
 #include "renderer.hpp"
 #include "mandelbrot.hpp"
+#include "appmanager.hpp"
 
-Renderer::Renderer()
+Renderer::Renderer(AppManager *_app)
     : window(SDL_CreateWindow("Mandelbrot Set", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, winWidth, winHeight, SDL_WINDOW_RESIZABLE | SDL_WINDOW_INPUT_GRABBED)),
       window_surface(SDL_GetWindowSurface(window)),
       canvas(SDL_CreateRGBSurfaceWithFormat(
           0, winWidth, winHeight, 32, SDL_PIXELFORMAT_RGBA8888)),
-      canvasBuffer(static_cast<Uint32 *>(canvas->pixels)) {
+      canvasBuffer(static_cast<Uint32 *>(canvas->pixels)),
+      app(_app) {
     std::cout << "renderer constructed" << std::endl;
 }
 
@@ -23,7 +25,7 @@ void Renderer::renderMandelbrot(const std::unique_ptr<Mandelbrot> &mandelbrot) {
     for (int y = 0; y < winHeight; y++, scaledY += mandelbrot->scale) {
         scaledX = mandelbrot->lowerXBound;
         for (int x = 0; x < winWidth; x++, scaledX += mandelbrot->scale) {
-            colour = mandelbrot->fn(scaledX, scaledY, SEARCH_LIMIT);
+            colour = mandelbrot->fn(scaledX, scaledY, app->SEARCH_LIMIT);
 
             this->canvasBuffer[linearPos++] = colour;
         }

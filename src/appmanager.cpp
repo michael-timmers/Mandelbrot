@@ -6,10 +6,11 @@
 #include "renderer.hpp"
 #include "mandelbrot.hpp"
 
-AppManager::AppManager()
-    : renderer(std::make_unique<Renderer>()),
+AppManager::AppManager(const int _SEARCH_LIMIT)
+    : renderer(std::make_unique<Renderer>(this)),
       mandelbrot(std::make_unique<Mandelbrot>()),
-      eventHandler(std::make_unique<EventHandler>()) {
+      eventHandler(std::make_unique<EventHandler>()),
+      SEARCH_LIMIT(_SEARCH_LIMIT) {
     std::cout << "app constructed" << std::endl;
 }
 

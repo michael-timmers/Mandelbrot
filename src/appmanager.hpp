@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 
+class AppManager;
+
 #include "mandelbrot.hpp"
 #include "renderer.hpp"
 #include "eventHandler.hpp"
@@ -11,7 +13,9 @@ class AppManager {
     std::unique_ptr<EventHandler> eventHandler;
 
    public:
-    AppManager();
+    const int SEARCH_LIMIT;
+
+    AppManager(const int _SEARCH_LIMIT);
 
     // a console output
     void intro();

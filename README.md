@@ -16,6 +16,6 @@ to compile, create a build folder, run 'cmake ..' and then 'make'.
 Run with './Mandelbrot'.
 
 ## License
-### GPL3
+### [GPL3](license.txt)
 
 <img alt="200 Steps mandelbrot set" src="images/img200.png" width="50%"><img alt="50000 Steps mandelbrot set" src="images/img50000.png" width="50%">
